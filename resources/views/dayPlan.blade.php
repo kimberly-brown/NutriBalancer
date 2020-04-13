@@ -1,7 +1,3 @@
-@extends('master')
-
-@section('content')
-
 <p>
   @for ($i = 0; $i < count($meals); $i++)
     @if ($meals[$i][2] == "on")

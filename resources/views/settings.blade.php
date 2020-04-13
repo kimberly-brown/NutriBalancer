@@ -46,3 +46,4 @@ per meal.
   <a class="sizes">L</a>
   <a class="sizes">XL</a>
 </p>
+@endsection

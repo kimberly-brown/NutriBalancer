@@ -122,4 +122,5 @@ $maximum_range=5000;
     </div>
   </fieldset>
   </div>
-</html>
+
+@endsection

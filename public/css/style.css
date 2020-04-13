@@ -1,6 +1,4 @@
 body {
-  margin-left: 20px;
-  margin-right: 20px;
   font-family: 'Nunito', sans-serif;
   font-size: 16px;
   color: black;
@@ -24,11 +22,6 @@ p {
   margin-left: 50px;
 }
 
-nav {
-  margin-left: -20px;
-  margin-right: -20px;
-}
-
 ul li {
   margin-left: 10px;
 }
@@ -36,6 +29,11 @@ ul li {
 ul li a {
   font-size: 18px;
   color: black;
+}
+
+nav {
+  margin-left: -60px;
+  margin-right: -60px;
 }
 
 .nav-item {

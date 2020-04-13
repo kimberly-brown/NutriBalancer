@@ -1,6 +1,3 @@
-@extends('master')
-
-@section('content')
 
 <nav class="navbar" style="background-color: #{{$theme_color}}">
   @include('logo')

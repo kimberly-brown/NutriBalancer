@@ -58,7 +58,7 @@ class PlanController extends Controller
 
   public function getHits($query, $minCals, $maxCals, $intolerances) {
     $req = Http::get('https://api.edamam.com/search?q='.$query.
-      '&app_id=a8e15111&app_key=ada13897f5ae9ee668a93e354e5f43ba&from=0&to=10'.
+      '&app_id=EDAMAM_ID&app_key=EDAMAM_KEY&from=0&to=10'.
       '&health=vegan&calories='.$minCals.'-'.$maxCals);
     if ($req->clientError() or $req->serverError()) {
       return [];

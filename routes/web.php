@@ -30,6 +30,8 @@ Route::get('settings/{id}/change_theme_color/{color}',
 Route::get('settings/{id}', array('as' => 'settings', 'uses' => 'UserController@settings'));
 
 Route::get('dashboard/{id}/generate', array('as' => 'generateNewPlan', 'uses' => 'PlanController@generateNewPlan'));
+Route::get('dashboard/{id}/save_and_generate', array('as' => 'saveAndGenerate', 'uses' => 'PlanController@saveAndGenerate'));
+
 Route::get('dashboard/{id}/modify_{type}_favorites/{viewIngredients}',
   array('as' => 'modifyFaves', 'uses' => 'PlanController@modifyFaves'));
 Route::post('dashboard/{id}/add_staple', array('as' => 'addStaple', 'uses' => 'PlanController@addStaple'));

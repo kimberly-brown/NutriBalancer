@@ -2,6 +2,12 @@
 
 @section('content')
 
+@if ($error != '')
+    <div class="alert alert-danger">
+        {{ $error }}
+    </div>
+@endif
+
 <div class="well">
   {!! Form::open(['action'=>'UserController@processSignup1', 'class'=>'form-horizontal']) !!}
 
@@ -44,7 +50,7 @@
     <div class="form-group">
       {!! Form::label('confirm-password', 'Confirm password:', ['class'=>'col-lg-2 control-label']) !!}
       <div class="col-lg-10">
-        {!! Form::password('confirmPassword', ['class'=>'form-control', 'placeholder'=>'Confirm password', 'type'=>'password']) !!}
+        {!! Form::password('password_confirmation', ['class'=>'form-control', 'placeholder'=>'Confirm password', 'type'=>'password']) !!}
       </div>
     </div>
 

@@ -1,7 +1,9 @@
 <p>
-  @for ($i = 0; $i < count($meals); $i++)
-    @if ($meals[$i][2] == "on")
-      Meal {{$i+1}}: <a href="{{ $meals[$i][3]}}" target="_blank">{{$meals[$i][0]}}</a>
+  @for ($i = 0; $i < $meals_per_day; $i++)
+    <a name="meal{{$start + $i + 1}}"></a>
+    @if ($meal_statuses[$start + $i] == "on")
+      Meal {{$start + $i + 1}}: <a href="{{ $meal_urls[$start + $i] }}" target="_blank">
+        {{$meal_names[$start + $i]}}</a>
       <a href="{{route('refreshMeal', ['id'=>$id, 'day'=> $day, 'meal'=>$i])}}">
         <i class="fa fa-refresh btn" style="color:green" role="button"></i>
       </a>
@@ -10,7 +12,8 @@
       </a>
       <br>
     @else
-      Meal {{$i+1}}: <a href=""><span style="text-decoration:line-through">{{$meals[$i][0]}}</span></a>
+      Meal {{$start + $i + 1}}: <a href=""><span style="text-decoration:line-through">
+        {{$meal_names[$start + $i] }}</span></a>
       <a href="{{route('refreshMeal', ['id'=>$id, 'day'=> $day, 'meal'=>$i])}}">
         <i class="fa fa-refresh btn" style="color:green" role="button"></i>
       </a>

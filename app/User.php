@@ -16,10 +16,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'password', 'min_cals', 'max_cals',
-        'meals_per_day', 'snacks_per_day', 'monday', 'tuesday', 'wednesday',
-        'thursday', 'friday', 'saturday', 'sunday', 'morning_favorites[]',
-        'evening_favorites[]',
+        'name', 'username', 'email', 'min_cals', 'max_cals',
+        'meals_per_day', 'snacks_per_day', 'morning_favorites',
+        'evening_favorites', 'meal_plan', 'old_meal_plans', 'morning_staples',
+        'evening_staples', 'password', 'meal_toggles',
     ];
 
     /**
@@ -28,7 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'remember_token', 'id',
     ];
 
     /**

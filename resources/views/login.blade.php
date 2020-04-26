@@ -2,6 +2,12 @@
 
 @section('content')
 
+@if ($error != '')
+    <div class="alert alert-danger">
+        {{ $error }}
+    </div>
+@endif
+
 <div class="well">
 
   {!! Form::open(['action'=>'UserController@loginValidate', 'class'=>'form-horizontal']) !!}

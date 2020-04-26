@@ -1,8 +1,7 @@
 @extends('master')
 
-@section('content')
-
 @include('navbar', ['theme_color'=>$theme_color])
+
 
 <p>
 Your preferred caloric range is {{$min_cals}} - {{$max_cals}}.
@@ -13,6 +12,7 @@ per meal.
 </p>
 
 <h3>Theme</h3>
+
 <p>
   @if ($theme_color == "97d67e")
     <a class="btn color-box" style="background-color:#97d67e; border: 2px solid black"
@@ -46,4 +46,29 @@ per meal.
   <a class="sizes">L</a>
   <a class="sizes">XL</a>
 </p>
-@endsection
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+@extends('base')

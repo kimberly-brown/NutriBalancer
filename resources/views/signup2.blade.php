@@ -7,6 +7,16 @@ $maximum_range=5000;
 
 @section('content')
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="well">
   {!! Form::open(['action'=>'UserController@processSignup2', 'class'=>'form-horizontal']) !!}
   <fieldset>
@@ -17,28 +27,6 @@ $maximum_range=5000;
       As a reminder, this app is intended to be vegan-only, so there are no filters
       related to non-vegan foods.
     </p>
-    <!-- Radio Buttons-->
-    <div class="form-group">
-        <div class="col-md-2"></div>
-        {!! Form::label('radios', 'Do you menstruate?', ['class' => 'col-lg-2 control-label']) !!}
-        <div class="col-md-6">
-            <div class="radio">
-                  {!! Form::radio('radio', 'option1', false, ['id' => 'radio1']) !!}
-                  Yes
-
-            </div>
-            <div class="radio">
-                {!! Form::radio('radio', 'option2', false, ['id' => 'radio2']) !!}
-                No
-            </div>
-            <div class="radio">
-                {!! Form::radio('radio', 'option3', true, ['id' => 'radio3']) !!}
-                Prefer not to say
-            </div>
-        </div>
-        <div class="col-md-2"></div>
-    </div>
-
     <!-- Select With One Default: # meals per day  -->
     <div class="form-group">
         <div class="col-md-2"></div>

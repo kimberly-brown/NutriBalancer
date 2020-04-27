@@ -1,7 +1,8 @@
 @extends('master')
 
-@include('navbar', ['theme_color'=>$theme_color])
+@include('navbar')
 
+<div>
 <h1> Welcome back, {{ $name }}. </h1>
 <p style="padding-left: 30px">Week at a glance:</p>
 <div class="meal-images" style="background-color:{{$theme_color}}">
@@ -155,3 +156,5 @@
 </div>
 
 <br>
+</div>
+@include('footer')

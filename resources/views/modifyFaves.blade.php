@@ -2,8 +2,6 @@
 
 @include('navbar')
 
-@section('content')
-
 <div class="well">
   {!! Form::open(['action'=>'PlanController@addFavoriteFood',
       'class'=>'form-horizontal']) !!}
@@ -188,4 +186,4 @@
   <br>
 </div>
 
-@endsection
+@include('footer')

@@ -1,5 +1,7 @@
 @extends('master')
 
+@include('navbar')
+
 @section('content')
 
 <div class="well">
@@ -20,7 +22,7 @@
               <p class="alignleft">
                 {{ $favorites[$i] }}
               </p>
-              <p class="alignright">
+              <p class="alignright" style="margin-left: -20px">
                 @if ($i != count($favorites)-1)
                   <a href="{{ route('deleteFavoriteFood', ['index'=>$i,
                           'type'=>$type, 'id'=>$id]) }}">
@@ -32,29 +34,26 @@
           </li>
         @endfor
       </ul>
-      <a href="{{route('clearFavoriteFoods', ['id'=>$id, 'type'=>$type])}}"
-         class="btn btn-secondary btn-lg active"
-         role="button" aria-pressed="true">
-        Clear all
-      </a>
     @endif
-    <br>
-    <br>
+    <a href="{{route('clearFavoriteFoods', ['id'=>$id, 'type'=>$type])}}"
+       class="btn btn-secondary btn-lg active pull-right"
+       role="button" aria-pressed="true" style="margin-top: 18px;">
+      Clear all
+    </a>
     <br>
       <!--Enter food-->
       <div class="form-group">
-        {!! Form::label('newFood', 'Add food:',
-          ['class'=>'col-lg-2 control-label']) !!}
-        <div class="col-lg-10">
+        <div class="col-lg-4" style="margin-left: 20px">
           {!! Form::text('newFood', $value=null, ['class'=>'form-control',
             'rows'=>1]) !!}
         </div>
-      </div>
 
+
+        <br>
       <!--Add food-->
-      <div class="form-group">
-        <div class="col-lg-10 col-lg-offset-2">
-          {!! Form::submit('Add', ['class'=> 'btn btn-lg btn-info pull-right'])
+
+        <div class="col-lg-1" style="margin-top: -25px;">
+          {!! Form::submit('Add', ['class'=> 'btn btn-lg btn-info'])
             !!}
         </div>
       </div>
@@ -99,7 +98,7 @@
                     @endif
                   </p>
                   <p class="alignright">
-                    @if ($i != count($staple_recipes)-1)
+                    @if ($i != count($staple_recipes) - 1)
                       <a href="">
                         <i class="fa fa-pencil btn" style="color:black" role="button"></i>
                       </a>
@@ -125,8 +124,9 @@
             </li>
           @endfor
         </ul>
+        <br>
         <a href="{{route('clearStapleRecipes', ['id'=>$id, 'type'=>$type])}}"
-           class="btn btn-secondary btn-lg active"
+           class="btn btn-secondary btn-lg active pull-right"
            role="button" aria-pressed="true">
           Clear all
         </a>
@@ -138,7 +138,7 @@
     <div class="form-group">
       {!! Form::label('newRecipe', 'Recipe name:', ['class'=>'col-lg-2
             control-label']) !!}
-      <div class="col-lg-10">
+      <div class="col-lg-8">
         {!! Form::text('name', $value=null, ['class'=>'form-control',
             'rows'=>1]) !!}
       </div>
@@ -148,7 +148,7 @@
     <div class="form-group">
       {!! Form::label('ingredients', 'Comma separated ingredients:',
         ['class'=>'col-lg-2 control-label']) !!}
-      <div class="col-lg-10">
+      <div class="col-lg-8">
         {!! Form::text('ingredients', $value=null, ['class'=>'form-control',
             'rows'=>1]) !!}
       </div>
@@ -158,15 +158,15 @@
     <div class="form-group">
       {!! Form::label('ingredients', 'Link (optional):',
         ['class'=>'col-lg-2 control-label']) !!}
-      <div class="col-lg-10">
+      <div class="col-lg-8">
         {!! Form::text('url', $value=null, ['class'=>'form-control',
             'rows'=>1]) !!}
       </div>
     </div>
-
+    <br>
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
-        {!! Form::submit('Add', ['class'=> 'btn btn-lg btn-info pull-right'])
+        {!! Form::submit('Add', ['class'=> 'btn btn-lg btn-info'])
             !!}
       </div>
     </div>
@@ -179,10 +179,13 @@
   </fieldset>
   {!! Form::close() !!}
 
-  <a href="{{route('dashboard')}}" class="btn btn-primary btn-lg active"
+  <a href="{{route('dashboard')}}" class="btn btn-primary btn-lg active pull-right"
      role="button" aria-pressed="true">
     Done
   </a>
+  <br>
+  <br>
+  <br>
 </div>
 
 @endsection

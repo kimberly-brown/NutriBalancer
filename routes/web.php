@@ -46,6 +46,8 @@ Route::post('process_signup_1', array('uses' => 'UserController@processSignup1')
 
 Route::post('process_signup_2', array('uses' => 'UserController@processSignup2'));
 
+Route::get('{id}/clear_toggles', array('as' => 'clearToggles', 'uses' => 'UserController@clearToggles'));
+Route::get('{id}/toggle_all', array('as' => 'toggleAll', 'uses' => 'UserController@toggleAll'));
 // ADDING/ DELETING STAPLES
 Route::post('add_favorite_food', array('as' => 'addFavoriteFood', 'uses' => 'PlanController@addFavoriteFood'));
 Route::get('delete_favorite_food', array('as'=>'deleteFavoriteFood', 'uses'=>'PlanController@deleteFavoriteFood'));

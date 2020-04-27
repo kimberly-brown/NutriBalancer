@@ -6,7 +6,7 @@ body {
 
 h1 {
   font-size: 50px;
-  padding-left: 10px;
+  padding-left: 30px;
 }
 
 h2 {
@@ -123,7 +123,7 @@ ul li a:hover {
 }
 
 .dashboard-right {
-  margin-left: 20%;
+  margin-left: 10%;
 }
 
 @media (max-width: 800px) {
@@ -151,6 +151,7 @@ footer {
 
 .meal-images {
   display: flex;
+  margin-left: -13px;
 }
 
 .meal-images > div {
@@ -165,8 +166,8 @@ footer {
   transition: .5s ease;
   opacity: 0;
   position: relative;
-  transform: translate(0px, -90px);
-  -ms-transform: translate(0px, -90px);
+  transform: translate(15px, -120px);
+  -ms-transform: translate(20px, -120px);
   text-align: center;
   background-color: white;
 }

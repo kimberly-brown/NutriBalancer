@@ -1,7 +1,5 @@
 @extends('master')
 
-@extends('base')
-
 @include('navbar', ['theme_color'=>$theme_color])
 
 <h1> Welcome back, {{ $name }}. </h1>
@@ -68,6 +66,8 @@
       <br>
       <p>Add some favorite foods and click 'Generate New' to get started!</p>
     @endif
+    <a href="{{ route('clearToggles', ['id'=>$id]) }}" class="btn btn-secondary active" role="button">Clear strikethroughs</a>
+    <a href="{{ route('toggleAll', ['id'=>$id]) }}" class="btn btn-secondary active" role="button">Strikethrough all</a>
   </div>
 
   <div class="dashboard-right">
@@ -99,7 +99,7 @@
     </p>
     @if ( count($shopping_list) == 0)
       <p>
-        Generate a meal plan to see your grocery list!
+        Nothing yet!
       </p>
     @endif
   </div>

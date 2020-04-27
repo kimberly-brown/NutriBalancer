@@ -339,17 +339,18 @@ class PlanController extends Controller
       $recipes = explode(",", $user->evening_staples);
       $favorites = explode(",", $user->evening_faves);
     }
-    for ($i=0; $i<count($recipes)-1; $i++) {
+    $count = 0;
+    for ($i=0; $i<count($recipes); $i++) {
+      $count++;
       if ($recipes[$i] != '') {
         $recipe = Meal::find((int) $recipes[$i]);
-        //dd($recipe);
         $recipeArray = [$recipe->name];
         $ingredients = explode("@@", $recipe->ingredients);
-        for ($i=0; $i < count($ingredients)-1; $i++) {
-          if ($ingredients[$i] != "") {
-            [$qty, $item] = UserController::separateQtyFromIngredient($ingredients[$i]);
+        for ($j=0; $j < count($ingredients)-1; $j++) {
+          if ($ingredients[$j] != "") {
+            [$qty, $item] = UserController::separateQtyFromIngredient($ingredients[$j]);
             if ($qty == -1) {
-              $ingredients[$i] = $item;
+              $ingredients[$j] = $item;
             }
           }
         }
@@ -358,9 +359,12 @@ class PlanController extends Controller
         array_push($urls, $recipe->url);
       }
     }
-    //dd($staples);
     array_push($staples, ["", ""]);
     array_push($urls, "");
+    $theme_color = "97d67e";
+    if ($user->theme_color != NULL) {
+      $theme_color = $user->theme_color;
+    }
     return view ('modifyFaves', [
       'id' => $id,
       'favorites' => $favorites,
@@ -368,6 +372,7 @@ class PlanController extends Controller
       'type' => $type,
       'viewIngredients'=>$viewIngredients,
       'urls'=>$urls,
+      'theme_color'=>$theme_color,
     ]);
   }
 
@@ -405,9 +410,9 @@ class PlanController extends Controller
     $user = User::find($request->id);
     $oldFavorites = [];
     if ($request->type == "morning") {
-      $oldFavorites = explode(",", $user->morning_favorites);
+      $oldFavorites = explode(",", $user->morning_faves);
     } else {
-      $oldFavorites = explode(",", $user->evening_favorites);
+      $oldFavorites = explode(",", $user->evening_faves);
     }
     $newFavorites = [];
     for ($i=0; $i<count($oldFavorites)-1; $i++) {
@@ -417,9 +422,9 @@ class PlanController extends Controller
     }
 
     if ($request->type == "morning") {
-      $user->morning_favorites = implode(",", $newFavorites).",";
+      $user->morning_faves = implode(",", $newFavorites).",";
     } else {
-      $user->evening_favorites = implode(",", $newFavorites).",";
+      $user->evening_faves = implode(",", $newFavorites).",";
     }
     $user->save();
     return redirect(route('modifyFaves', [

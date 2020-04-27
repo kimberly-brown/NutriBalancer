@@ -149,7 +149,9 @@ class UserController extends Controller
             array_push($meal_names, $name);
             array_push($meal_urls, $meal->url);
             if ($meal->image != "") {
-              array_push($images, [$meal->image, $name]);
+              if (!in_array([$meal->image, $name], $images)) {
+                array_push($images, [$meal->image, $name]);
+              }
             }
           } else {
           }
@@ -171,7 +173,6 @@ class UserController extends Controller
     $nutrient_summary = $this->getNutrientSummary($user->meal_plan);
     shuffle($images);
     $meal_statuses = explode(",", $user->meal_toggles);
-    //dd($user);
     return view('dashboard', [
       'name'=>$user->name,
       'id'=>$id,
@@ -309,6 +310,28 @@ class UserController extends Controller
       }
     }
     return [$labels, $qtys, $units];
+  }
+
+  public static function clearToggles($id) {
+    $user = User::find($id);
+    $meal_toggles = "";
+    for ($i=0; $i < 7 * $user->meals_per_day; $i++) {
+      $meal_toggles.="on,";
+    }
+    $user->meal_toggles = $meal_toggles;
+    $user->save();
+    return redirect('dashboard');
+  }
+
+  public static function toggleAll($id) {
+    $user = User::find($id);
+    $meal_toggles = "";
+    for ($i=0; $i < 7 * $user->meals_per_day; $i++) {
+      $meal_toggles.="off,";
+    }
+    $user->meal_toggles = $meal_toggles;
+    $user->save();
+    return redirect('dashboard');
   }
 
   /**

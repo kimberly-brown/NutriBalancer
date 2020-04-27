@@ -1,9 +1,9 @@
 ## About NutriBalancer
 NutriBalancer is an application that leverages the Edamam API to generate unique weekly meal plans for users, offering
 them a recipe for each meal of the day, and searching for those recipes based on their favorite foods. Users can refresh
-meals in order to get another suggestion. They are given a shopping list of all the ingredients they need to buy for the week. If they "suppress" a recipe, it will not appear on the shopping list. 
+meals in order to get another suggestion. They are given a shopping list of all the ingredients they need to buy for the week. If they "suppress" a recipe, it will not appear on the shopping list.
 
-Users can also add their own staple recipes. 
+Users can also add their own staple recipes.
 
 
 ## Setup Instructions
@@ -17,8 +17,9 @@ If you are interested in contributing to this project, please shoot me an email 
 
 ## Security Vulnerabilities
 
-The username/ password system is very insecure, as there is currently not even a minimum password length. The app is also not authenticating users. Please do not rely on this app for any kind of security. Consider using a fake email and making a unique password for just this application. I am working on making the app more secure. 
+Please do not rely on this app for any kind of security. The app is not authenticating users- it is passing user id's around in the URLs.
+Consider using a fake email and making a unique password for just this application. I am working on making the app more secure. 
 
 
 ## Known Bugs
-The hovering highlight on the "modify favorites" page is visually glitchy. 
+The hovering highlight on the "modify favorites" page is visually glitchy.

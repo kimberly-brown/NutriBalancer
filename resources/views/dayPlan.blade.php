@@ -12,7 +12,8 @@
       </a>
       <br>
     @else
-      Meal {{$start + $i + 1}}: <a href=""><span style="text-decoration:line-through">
+      Meal {{$start + $i + 1}}: <a href="{{ $meal_urls[$start + $i] }}" target="_blank">
+        <span style="text-decoration:line-through">
         {{$meal_names[$start + $i] }}</span></a>
       <a href="{{route('refreshMeal', ['id'=>$id, 'day'=> $day, 'meal'=>$i])}}">
         <i class="fa fa-refresh btn" style="color:green" role="button"></i>

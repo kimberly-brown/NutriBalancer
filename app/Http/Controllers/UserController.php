@@ -173,6 +173,7 @@ class UserController extends Controller
     $nutrient_summary = $this->getNutrientSummary($user->meal_plan);
     shuffle($images);
     $meal_statuses = explode(",", $user->meal_toggles);
+    $meal_plans = explode(",", $user->old_meal_plans);
     return view('dashboard', [
       'name'=>$user->name,
       'id'=>$id,
@@ -191,6 +192,7 @@ class UserController extends Controller
       'nutrient_summary'=>UserController::getAverageNutrients($nutrient_summary),
       'day_order' => $day_order,
       'meal_statuses' => $meal_statuses,
+      'meal_plans' => $meal_plans,
     ]);
   }
 
@@ -231,8 +233,6 @@ class UserController extends Controller
         }
       }
     }
-    //dd($shopping_list);
-    //dd($raw_ingredients);
     ksort($shopping_list);
     $result = [];
     foreach ($shopping_list as $item => $info) {
@@ -300,16 +300,19 @@ class UserController extends Controller
   }
 
   public static function getAverageNutrients($nutrient_summary) {
-    $labels = array_keys($nutrient_summary[0]);
-    $qtys = array_fill(0, count($labels), 0);
-    $units = array_fill(0, count($labels), "");
-    for ($d=0; $d< count($nutrient_summary); $d++) {
-      for ($nut=0; $nut< count($nutrient_summary[$d]); $nut++) {
-        $qtys[$nut] += $nutrient_summary[$d][$labels[$nut]][0];
-        $units[$nut] = $nutrient_summary[$d][$labels[$nut]][1];
+    if (count($nutrient_summary) != 0) {
+      $labels = array_keys($nutrient_summary[0]);
+      $qtys = array_fill(0, count($labels), 0);
+      $units = array_fill(0, count($labels), "");
+      for ($d=0; $d< count($nutrient_summary); $d++) {
+        for ($nut=0; $nut< count($nutrient_summary[$d]); $nut++) {
+          $qtys[$nut] += $nutrient_summary[$d][$labels[$nut]][0];
+          $units[$nut] = $nutrient_summary[$d][$labels[$nut]][1];
+        }
       }
+      return [$labels, $qtys, $units];
     }
-    return [$labels, $qtys, $units];
+    return [[], [], []];
   }
 
   public static function clearToggles($id) {
@@ -491,7 +494,7 @@ class UserController extends Controller
     $encoded = str_replace("é", "e", $encoded);
     $encoded = str_replace("Â", "", $encoded);
     $encoded = str_replace("ñ", "n", $encoded);
-    $encoded = str_replace("â", "n", $encoded);
+    $encoded = str_replace("â", "a", $encoded);
     $encoded = str_replace("*", "", $encoded);
 
     //$decoded_ingredient = str_replace("?", "", $decoded_ingredient);
@@ -555,6 +558,7 @@ class UserController extends Controller
     $cleaned = str_replace("1-pound block", "lbs", $cleaned);
     $cleaned = str_replace("plus extra", "", $cleaned);
     $cleaned = str_replace("as needed", "", $cleaned);
+    $cleaned = str_replace("for frying", "", $cleaned);
     $cleaned = str_replace("as desired", "", $cleaned);
     $cleaned = str_replace("plus more for", "", $cleaned);
     $cleaned = str_replace("drizzling", "", $cleaned);
@@ -595,8 +599,10 @@ class UserController extends Controller
     $cleaned = str_replace("in puree", "", $cleaned);
     $cleaned = str_replace("rind discarded", "", $cleaned);
     $cleaned = str_replace("into chunks", "", $cleaned);
+    $cleaned = str_replace("lengthwise", "", $cleaned);
     $cleaned = str_replace("for brushing", "", $cleaned);
     $cleaned = str_replace("drizzle", "", $cleaned);
+    $cleaned = str_replace("stem removed", "", $cleaned);
     // unnecessary food adjectives
     $cleaned = str_replace("extra virgin", "", $cleaned);
     $cleaned = str_replace("extra-virgin", "", $cleaned);
@@ -612,6 +618,7 @@ class UserController extends Controller
     $cleaned = str_replace("very ", " ", $cleaned);
     $cleaned = str_replace("about ", " ", $cleaned);
     $cleaned = str_replace("loosely packed", "", $cleaned);
+    $cleaned = str_replace("or more", "", $cleaned);
     // cooking adjectives
     $cleaned = str_replace("ground", "", $cleaned);
     $cleaned = str_replace("toasted", "", $cleaned);
@@ -652,6 +659,8 @@ class UserController extends Controller
     $cleaned = str_replace("scant ", " ", $cleaned);
     $cleaned = str_replace("few ", " ", $cleaned);
     $cleaned = str_replace("from ", " ", $cleaned);
+    $cleaned = str_replace("clean ", " ", $cleaned);
+
     // nouns to get rid of
     $cleaned = str_replace("slices ", " ", $cleaned);
     $cleaned = str_replace("pieces ", " ", $cleaned);
@@ -664,7 +673,7 @@ class UserController extends Controller
     $cleaned = str_replace("freshly ", " ", $cleaned);
     $cleaned = str_replace("preferably ", " ", $cleaned);
     $cleaned = str_replace("thickly ", " ", $cleaned);
-    // spelling
+    // standardize spelling/ word choice
     $cleaned = str_replace("galic", "garlic", $cleaned);
     $cleaned = str_replace("garlic cloves", "cloves garlic", $cleaned);
     $cleaned = str_replace("garlic clove", "cloves garlic", $cleaned);
@@ -672,6 +681,7 @@ class UserController extends Controller
     $cleaned = str_replace("sun flour", "sunflower", $cleaned);
     $cleaned = str_replace("sunflour", "sunflower", $cleaned);
     $cleaned = str_replace("vinager", "vinegar", $cleaned);
+    $cleaned = str_replace("reduced-sodium", "reduced-salt", $cleaned);
     // grammar
     $cleaned = str_replace("or not", "", $cleaned);
     $cleaned = str_replace("a bit", "", $cleaned);

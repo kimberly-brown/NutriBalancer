@@ -5,9 +5,20 @@ meals in order to get another suggestion. They are given a shopping list of all 
 
 Users can also add their own staple recipes.
 
+## Pre-requisites
+In addition to everything in composer.json:
+- MySQL 8+
 
 ## Setup Instructions
-Will be written soon.
+Not complete.
+
+First-time setup:
+
+1. 'php artisan migrate:refresh'
+2. 'composer dump-autoload'
+3. 'php artisan db:seed'
+
+Start the server: 'php artisan serve'
 
 
 ## Contributing

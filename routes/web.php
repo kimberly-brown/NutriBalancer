@@ -24,6 +24,9 @@ Route::get('login', 'UserController@login');
 Route::get('dashboard',
   array('as'=>'dashboard', 'uses'=>'UserController@dashboard'));
 
+Route::get('{id}/save', array('as'=>'save', 'uses'=>'PlanController@save'));
+Route::get('{id}/clear_plans', array('as'=>'clearPlans', 'uses'=>'PlanController@clearMealPlans'));
+
 Route::get('settings/{id}/change_theme_color/{color}',
   array('as'=>'changeThemeColor', 'uses'=>'UserController@changeThemeColor'));
 

@@ -49,7 +49,7 @@
       class="btn btn-secondary btn-lg active">
         Generate New
       </button>
-        <a href="/dashboard/save" class="btn btn-secondary btn-lg active" role="button">
+        <a href="{{ route('save', ['id'=>$id]) }}" class="btn btn-secondary btn-lg active" role="button">
           Save
         </a>
       @else
@@ -155,6 +155,18 @@
   </div>
 </div>
 
-<br>
+
+<div class="dashboard-container">
+  <div class="dashboard-left">
+  <h3>Saved plans</h3>
+  <ul style="list-style-type:none;">
+    @for ($i = 0; $i < count($meal_plans)-1; $i++)
+      <li>{{ $meal_plans[$i] }}</li>
+    @endfor
+  </ul>
+  <br>
+  <a href="{{ route('clearPlans', ['id'=>$id]) }}" class="btn btn-primary" role="button">Clear all</a>
+  <br>
+</div>
 </div>
 @include('footer')

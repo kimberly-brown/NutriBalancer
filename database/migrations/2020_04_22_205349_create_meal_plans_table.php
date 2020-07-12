@@ -17,6 +17,7 @@ class CreateMealPlansTable extends Migration
             $table->id();
             $table->timestamps();
             $table->text('plan');
+            $table->text('name')->nullable();
             $table->longText('images');
         });
     }

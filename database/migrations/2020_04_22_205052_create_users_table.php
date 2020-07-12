@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->integer('min_cals');
             $table->integer('max_cals');
-            $table->integer('meal_plan');
+            $table->integer('meal_plan')->nullable();
             $table->integer('meals_per_day');
             $table->integer('snacks_per_day');
             $table->string('username')->unique();

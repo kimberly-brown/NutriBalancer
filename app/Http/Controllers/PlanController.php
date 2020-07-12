@@ -110,10 +110,29 @@ class PlanController extends Controller
   public function saveAndGenerate($id) {
     $user = User::find($id);
     $curr = $user->meal_plan;
-    $user->old_meal_plans.=",".$curr.",";
+    $user->old_meal_plans.=$curr.",";
     $user->save();
     $this->generateNewPlan($id);
     return redirect('dashboard');
+  }
+
+  public function clearMealPlans($id) {
+    $user = User::find($id);
+    $user->old_meal_plans = "";
+    $user->save();
+    return redirect('dashboard');
+  }
+
+  public function save($id) {
+    $user = User::find($id);
+    $curr = $user->meal_plan;
+    $user->old_meal_plans.=$curr.",";
+    $user->save();
+    return redirect('dashboard');
+  }
+
+  public function nameMealPlan($id) {
+    
   }
 
   public function generateNewPlan($id) {

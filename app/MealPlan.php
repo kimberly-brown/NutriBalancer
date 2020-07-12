@@ -14,7 +14,7 @@ class MealPlan extends Model
      * @var array
      */
     protected $fillable = [
-      'plan', 'images',
+      'plan', 'images', 'name'
     ];
 
     /**
